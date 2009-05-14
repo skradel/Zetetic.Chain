@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://zetetic.net/schemas/chain/catalog.xsd" elementFormDefault="qualified" targetNamespace="http://zetetic.net/schemas/chain/catalog.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="catalog" nillable="true" type="tns:XmlCatalog" />
+  <xs:complexType name="XmlCatalog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CatalogBase">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="1" name="command" type="tns:XmlCommand" />
+            <xs:element minOccurs="0" maxOccurs="1" name="chain" type="tns:XmlChain" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CatalogBase" />
+  <xs:complexType name="XmlCommand">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:XmlConfig">
+        <xs:attribute name="typeName" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="XmlConfig" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="add" type="tns:XmlConfigProperty" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="XmlConfigProperty">
+    <xs:attribute name="key" type="xs:string" />
+    <xs:attribute name="value" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="XmlChain">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:XmlConfig">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="1" name="command" type="tns:XmlCommand" />
+            <xs:element minOccurs="0" maxOccurs="1" name="chain" type="tns:XmlChain" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

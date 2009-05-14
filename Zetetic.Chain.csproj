@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{03DE0261-4890-49F2-9F26-964255B26D0C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zetetic.Chain</RootNamespace>
+    <AssemblyName>Zetetic.Chain</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CatalogChangedEventArgs.cs" />
+    <Compile Include="ChainException.cs" />
+    <Compile Include="ChainFactory.cs" />
+    <Compile Include="ChainRequiredAttribute.cs" />
+    <Compile Include="Generic\ContextNotRemoteableException.cs" />
+    <Compile Include="Generic\CopyCommand.cs" />
+    <Compile Include="Generic\DispatchLookupCommand.cs" />
+    <Compile Include="Generic\DispatchTargetException.cs" />
+    <Compile Include="Generic\LookupCommand.cs" />
+    <Compile Include="Generic\RemoteCommand.cs" />
+    <Compile Include="Generic\RemoveCommand.cs" />
+    <Compile Include="ICatalog.cs" />
+    <Compile Include="IChain.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IContext.cs" />
+    <Compile Include="IFilter.cs" />
+    <Compile Include="ContextBase.cs" />
+    <Compile Include="CatalogBase.cs" />
+    <Compile Include="NoSuchCommandException.cs" />
+    <Compile Include="RemotableCatalog.cs" />
+    <Compile Include="Xml\ChainXmlSerializationException.cs" />
+    <Compile Include="Xml\XmlConfig.cs" />
+    <Compile Include="Xml\XmlCatalog.cs" />
+    <Compile Include="CatalogFactory.cs" />
+    <Compile Include="ChainBase.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="Xml\XmlChain.cs" />
+    <Compile Include="Xml\XmlCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xml\XmlConfigProperty.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="catalog.xsd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
