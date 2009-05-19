@@ -57,6 +57,7 @@
     <Compile Include="ContextBase.cs" />
     <Compile Include="CatalogBase.cs" />
     <Compile Include="NoSuchCommandException.cs" />
+    <Compile Include="ParallelChain.cs" />
     <Compile Include="RemotableCatalog.cs" />
     <Compile Include="Xml\ChainXmlSerializationException.cs" />
     <Compile Include="Xml\XmlConfig.cs" />
