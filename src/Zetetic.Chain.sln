@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Zetetic.Chain.vsmdi = Zetetic.Chain.vsmdi
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetetic.Chain.ChainRunner", "..\Zetetic.Chain.ChainRunner\Zetetic.Chain.ChainRunner.csproj", "{C5813EF1-7DBF-412C-A4EC-5489BCE06E90}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Zetetic.Chain.vsmdi
@@ -28,6 +30,10 @@ Global
 		{8478F503-2ACA-42D8-BF41-891DD9F09B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8478F503-2ACA-42D8-BF41-891DD9F09B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8478F503-2ACA-42D8-BF41-891DD9F09B1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5813EF1-7DBF-412C-A4EC-5489BCE06E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5813EF1-7DBF-412C-A4EC-5489BCE06E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5813EF1-7DBF-412C-A4EC-5489BCE06E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5813EF1-7DBF-412C-A4EC-5489BCE06E90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
