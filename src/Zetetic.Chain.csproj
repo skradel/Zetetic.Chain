@@ -43,6 +43,7 @@
     <Compile Include="ChainFactory.cs" />
     <Compile Include="ChainRequiredAttribute.cs" />
     <Compile Include="Commands\BatchCommand.cs" />
+    <Compile Include="FileBasedCatalogFactory.cs" />
     <Compile Include="Generic\ContextNotRemoteableException.cs" />
     <Compile Include="Generic\CopyCommand.cs" />
     <Compile Include="Generic\DispatchLookupCommand.cs" />

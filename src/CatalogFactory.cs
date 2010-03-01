@@ -11,18 +11,30 @@ using Zetetic.Chain.Xml;
 
 namespace Zetetic.Chain
 {
+    public class XmlCatalogAndMetadata
+    {
+        public XmlCatalog Catalog { get; protected set; }
+
+        public readonly System.Collections.Hashtable Metadata = new System.Collections.Hashtable();
+
+        public XmlCatalogAndMetadata(XmlCatalog catalog)
+        {
+            this.Catalog = catalog;
+        }
+    }
+
     public class CatalogFactory
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private static CatalogFactory factoryInstance;
+        private static CatalogFactory factoryInstance, fileFactoryInstance;
         private static readonly object factoryInstanceLock = new object();
 
         private readonly object _dflock = new object();
         private ICatalog _defaultCatalog;
 
-        private Dictionary<string, Zetetic.Chain.Xml.XmlCatalog> _xmlCatalogs
-            = new Dictionary<string, Zetetic.Chain.Xml.XmlCatalog>();
+        protected Dictionary<string, XmlCatalogAndMetadata> LoadedCatalogs
+            = new Dictionary<string, XmlCatalogAndMetadata>();
 
         public static CatalogFactory GetFactory()
         {
@@ -31,30 +43,71 @@ namespace Zetetic.Chain
 
         public static CatalogFactory GetFactory(string uri)
         {
-            if (factoryInstance == null)
+            if ("FILE".Equals(uri, StringComparison.InvariantCultureIgnoreCase))
             {
-                using (new ShortLock(factoryInstanceLock, TimeSpan.FromSeconds(5)))
+                if (fileFactoryInstance == null)
                 {
-                    if (factoryInstance == null)
-                        factoryInstance = new CatalogFactory();
+                    using (new ShortLock(factoryInstanceLock, TimeSpan.FromSeconds(5)))
+                    {
+                        if (fileFactoryInstance == null)
+                            fileFactoryInstance = new FileBasedCatalogFactory();
+                    }
                 }
+                return fileFactoryInstance;
             }
-
-            return factoryInstance;
+            else
+            {
+                if (factoryInstance == null)
+                {
+                    using (new ShortLock(factoryInstanceLock, TimeSpan.FromSeconds(5)))
+                    {
+                        if (factoryInstance == null)
+                            factoryInstance = new CatalogFactory();
+                    }
+                }
+                return factoryInstance;
+            }
         }
 
-        private CatalogFactory() { }
+        internal CatalogFactory() { }
 
         public void ClearCatalogState()
         {
             logger.Debug("Clearing all in-memory catalog state");
 
-            using (new ShortLock(_xmlCatalogs))
-                _xmlCatalogs.Clear();
+            using (new ShortLock(LoadedCatalogs))
+                LoadedCatalogs.Clear();
 
             using (new ShortLock(_dflock))
                 _defaultCatalog = null;
+        }
 
+        protected XmlCatalogAndMetadata LoadXmlCatalog(string uri)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(XmlCatalog));
+
+            XmlDeserializationEvents devents = new XmlDeserializationEvents();
+            devents.OnUnknownAttribute = delegate(object sender, XmlAttributeEventArgs e)
+            {
+                logger.Warn("Unknown attribute {0}", e.Attr.Name);
+            };
+
+            devents.OnUnknownElement = delegate(object sender, XmlElementEventArgs e)
+            {
+                logger.Warn("Unknown element {0}", e.Element.Name);
+            };
+
+            XmlCatalog cat;
+
+            using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(uri))
+                cat = (XmlCatalog)ser.Deserialize(reader, devents);
+
+            cat.LoadedFrom = uri;
+
+            XmlCatalogAndMetadata xmd = new XmlCatalogAndMetadata(cat);
+            xmd.Metadata.Add("uri", uri);
+
+            return xmd;
         }
 
         public ICatalog GetCatalog()
@@ -62,7 +115,7 @@ namespace Zetetic.Chain
             return GetCatalog(ConfigurationManager.AppSettings["zetetic.chain.defaultcatalog"]);
         }
 
-        public ICatalog GetCatalog(string uri)
+        public virtual ICatalog GetCatalog(string uri)
         {
             if (string.IsNullOrEmpty(uri))
             {
@@ -80,34 +133,18 @@ namespace Zetetic.Chain
             }
             else
             {
-                XmlCatalog cat = null;
+                XmlCatalogAndMetadata cat = null;
 
-                using (new ShortLock(_xmlCatalogs))
-                    if (_xmlCatalogs.ContainsKey(uri))
-                        cat = _xmlCatalogs[uri];
+                using (new ShortLock(LoadedCatalogs))
+                    if (LoadedCatalogs.ContainsKey(uri))
+                        cat = LoadedCatalogs[uri];
 
                 if (cat == null)
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(XmlCatalog));
+                    cat = LoadXmlCatalog(uri);
 
-                    XmlDeserializationEvents devents = new XmlDeserializationEvents();
-                    devents.OnUnknownAttribute = delegate(object sender, XmlAttributeEventArgs e)
-                    {
-                        logger.Warn("Unknown attribute {0}", e.Attr.Name);
-                    };
-
-                    devents.OnUnknownElement = delegate(object sender, XmlElementEventArgs e)
-                    {
-                        logger.Warn("Unknown element {0}", e.Element.Name);
-                    };
-
-                    using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(uri))
-                        cat = (XmlCatalog)ser.Deserialize(reader, devents);
-
-                    cat.LoadedFrom = uri;
-
-                    using (new ShortLock(_xmlCatalogs))
-                        _xmlCatalogs[uri] = cat;
+                    using (new ShortLock(LoadedCatalogs))
+                        LoadedCatalogs[uri] = cat;
 
                     logger.Info("Created and stored XmlCatalog from {0}", uri);
                 }
@@ -116,7 +153,7 @@ namespace Zetetic.Chain
                     logger.Debug("Reuse existing catalog from {0}", uri);
                 }
 
-                return cat;
+                return cat.Catalog;
             }
         }
     }
