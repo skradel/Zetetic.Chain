@@ -32,6 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
+    <Reference Include="Spring.Core, Version=1.3.0.20349, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Spring.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -62,6 +66,8 @@
     <Compile Include="ParallelChain.cs" />
     <Compile Include="RemotableCatalog.cs" />
     <Compile Include="Xml\ChainXmlSerializationException.cs" />
+    <Compile Include="Xml\SpringCatalog.cs" />
+    <Compile Include="Xml\SpringChain.cs" />
     <Compile Include="Xml\XmlConfig.cs" />
     <Compile Include="Xml\XmlCatalog.cs" />
     <Compile Include="CatalogFactory.cs" />

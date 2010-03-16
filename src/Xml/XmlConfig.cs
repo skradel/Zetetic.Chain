@@ -94,7 +94,7 @@ namespace Zetetic.Chain.Xml
                     }
                     else
                     {
-                        logger.Debug("Call setter {0}, convert value {1} to {2}",
+                        logger.Trace("Call setter {0}, convert value {1} to {2}",
                             pi.Name, val, pi.PropertyType);
 
                         pi.SetValue(target, XmlConfig.ChangeType(val, pi.PropertyType), null);

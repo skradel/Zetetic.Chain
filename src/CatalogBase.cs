@@ -35,13 +35,9 @@ namespace Zetetic.Chain
         {
             get
             {
-                if (BaseStorage.ContainsKey(cmdName))
-                {
-                    logger.Debug("Located command {0}", cmdName);
+                if (BaseStorage.ContainsKey(cmdName))     
                     return BaseStorage[cmdName];
-                }
-
-                logger.Info("No such command {0}", cmdName);
+                
                 throw new NoSuchCommandException(this, cmdName);
             }
 
@@ -55,24 +51,18 @@ namespace Zetetic.Chain
                         this.BaseStorage.Remove(cmdName);
 
                         if (CommandRemoved != null)
-                        {
-                            CommandRemoved(this, new CatalogChangedEventArgs(cmdName, cmd, false));
-                        }
+                            CommandRemoved(this, new CatalogChangedEventArgs(cmdName, cmd, false));                     
                     }
                 }
                 else
                 {
-                    if (CommandRemoved != null && this.BaseStorage.ContainsKey(cmdName))
-                    {
+                    if (CommandRemoved != null && this.BaseStorage.ContainsKey(cmdName))            
                         CommandRemoved(this, new CatalogChangedEventArgs(cmdName, BaseStorage[cmdName], true));
-                    }
-
+                    
                     BaseStorage[value.Name] = value;
 
                     if (CommandAdded != null)
-                    {
-                        CommandAdded(this, new CatalogChangedEventArgs(cmdName, value, false));
-                    }
+                        CommandAdded(this, new CatalogChangedEventArgs(cmdName, value, false)); 
                 }
             }
         }
