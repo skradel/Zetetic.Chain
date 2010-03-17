@@ -9,29 +9,26 @@ namespace Zetetic.Chain
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        protected List<ICommand> _cmds = new List<ICommand>();
-
         [System.Xml.Serialization.XmlIgnore]
         public bool Frozen { get; protected set; }
 
-        internal ChainBase() { }
+        public ChainBase() 
+        {
+            this.Commands = new List<ICommand>();
+        }
 
         #region IChain Members
 
         public string Name { get; set; }
 
-        public virtual IEnumerable<ICommand> Commands()
-        {
-            foreach (ICommand cmd in _cmds)
-                yield return cmd;
-        }
+        public IList<ICommand> Commands { get; set; }
 
         public virtual void Add(ICommand cmd)
         {
             if (this.Frozen)
                 throw new ChainException("Chain is frozen to changes");
 
-            _cmds.Add(cmd);
+            this.Commands.Add(cmd);
         }
 
         #endregion
@@ -89,7 +86,7 @@ namespace Zetetic.Chain
 
             try
             {
-                foreach (ICommand cmd in _cmds)
+                foreach (ICommand cmd in this.Commands)
                 {
                     if (cmd is IFilter)
                         filters.Push((IFilter)cmd);

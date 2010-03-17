@@ -27,7 +27,7 @@ namespace Zetetic.Chain.Xml
             if (cmd is IChain)
             {
                 XmlChain x = new XmlChain(cmd.Name);
-                foreach (ICommand c in ((IChain)cmd).Commands())
+                foreach (ICommand c in ((IChain)cmd).Commands)
                 {
                     x.Commands.Add(XmlConfig.CreateFromICommand(c));
                 }

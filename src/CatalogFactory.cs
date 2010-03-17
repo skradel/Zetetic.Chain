@@ -117,18 +117,18 @@ namespace Zetetic.Chain
 
         public virtual ICatalog GetCatalog(string uri)
         {
-            if (string.IsNullOrEmpty(uri))
+            if (string.IsNullOrEmpty(uri) || "spring".Equals(uri, StringComparison.InvariantCultureIgnoreCase))
             {
                 bool isNew = false;
                 lock (_dflock)
                 {
                     if (_defaultCatalog == null)
                     {
-                        _defaultCatalog = new CatalogBase();
+                        _defaultCatalog = new SpringCatalog();
                         isNew = true;
                     }
                 }
-                logger.Debug("Fetching default in-memory catalog (new: {0})", isNew);
+                logger.Trace("Fetching default SpringCatalog (new: {0})", isNew);
                 return _defaultCatalog;
             }
             else

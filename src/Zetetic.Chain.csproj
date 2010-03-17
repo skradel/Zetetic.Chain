@@ -66,8 +66,7 @@
     <Compile Include="ParallelChain.cs" />
     <Compile Include="RemotableCatalog.cs" />
     <Compile Include="Xml\ChainXmlSerializationException.cs" />
-    <Compile Include="Xml\SpringCatalog.cs" />
-    <Compile Include="Xml\SpringChain.cs" />
+    <Compile Include="SpringCatalog.cs" />
     <Compile Include="Xml\XmlConfig.cs" />
     <Compile Include="Xml\XmlCatalog.cs" />
     <Compile Include="CatalogFactory.cs" />
