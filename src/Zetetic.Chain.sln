@@ -1,15 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetetic.Chain", "Zetetic.Chain.csproj", "{03DE0261-4890-49F2-9F26-964255B26D0C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetetic.Chain.UnitTest", "Zetetic.Chain.UnitTest\Zetetic.Chain.UnitTest.csproj", "{8478F503-2ACA-42D8-BF41-891DD9F09B1F}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{58D619E4-FA5F-48B6-8E9C-9CBDCD8BC29E}"
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		Zetetic.Chain.vsmdi = Zetetic.Chain.vsmdi
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetetic.Chain", "Zetetic.Chain.csproj", "{03DE0261-4890-49F2-9F26-964255B26D0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetetic.Chain.UnitTest", "Zetetic.Chain.UnitTest\Zetetic.Chain.UnitTest.csproj", "{8478F503-2ACA-42D8-BF41-891DD9F09B1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetetic.Chain.ChainRunner", "..\Zetetic.Chain.ChainRunner\Zetetic.Chain.ChainRunner.csproj", "{C5813EF1-7DBF-412C-A4EC-5489BCE06E90}"
 EndProject
