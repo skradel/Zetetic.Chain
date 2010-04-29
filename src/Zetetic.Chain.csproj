@@ -53,6 +53,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
+    <Reference Include="Spring.Core, Version=1.3.0.20349, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Spring.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -88,6 +92,7 @@
     <Compile Include="Security\PamContext.cs" />
     <Compile Include="Security\SuccessCommand.cs" />
     <Compile Include="Xml\ChainXmlSerializationException.cs" />
+    <Compile Include="SpringCatalog.cs" />
     <Compile Include="Xml\XmlConfig.cs" />
     <Compile Include="Xml\XmlCatalog.cs" />
     <Compile Include="CatalogFactory.cs" />
@@ -102,6 +107,7 @@
     <None Include="catalog.xsd" />
   </ItemGroup>
   <ItemGroup>
+
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -117,6 +123,10 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+
+    <Content Include="SampleConfig\SpringCatalogDemo.xml" />
+    <Content Include="SampleConfig\SpringCatalogObjects.xml" />
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

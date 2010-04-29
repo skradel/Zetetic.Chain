@@ -8,6 +8,6 @@ namespace Zetetic.Chain
     {
         void Add(ICommand cmd);
 
-        IEnumerable<ICommand> Commands();
+        IList<ICommand> Commands { get; set; }
     }
 }

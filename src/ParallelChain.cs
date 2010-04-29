@@ -18,12 +18,12 @@ namespace Zetetic.Chain
         {
             this.Frozen = true;
 
-            ManualResetEvent[] waiters = new ManualResetEvent[this._cmds.Count];
-            ParallelCommand[] cmds = new ParallelCommand[this._cmds.Count];
+            ManualResetEvent[] waiters = new ManualResetEvent[this.Commands.Count];
+            ParallelCommand[] cmds = new ParallelCommand[this.Commands.Count];
             Stack<IFilter> filters = new Stack<IFilter>();
 
             int i = -1;
-            foreach (ICommand cmd in this._cmds)
+            foreach (ICommand cmd in this.Commands)
             {
                 i++;
 

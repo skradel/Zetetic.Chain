@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <object id="t1" singleton="false" type="Zetetic.Chain.Xml.SpringChain, Zetetic.Chain">
+    <property name="Name" value="t1"></property>
+    <property name="Commands">
+      <list>
+        <object id="t1_0" singleton="false" type="Zetetic.Chain.Generic.CopyCommand, Zetetic.Chain">
+          <property name="Name" value="t1_0" />
+          <property name="FromKey" value="foo" />
+          <property name="ToKey" value="bar" />
+        </object>
+      </list>
+    </property>
+  </object>
+</objects>

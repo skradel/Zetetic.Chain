@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<catalog xmlns="http://zetetic.net/schemas/chain/catalog.xsd">
+  <command name="t1" />
+  <command name="t2" />
+</catalog>
