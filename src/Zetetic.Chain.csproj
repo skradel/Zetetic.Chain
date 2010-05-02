@@ -87,6 +87,7 @@
     <Compile Include="ParallelChain.cs" />
     <Compile Include="RemotableCatalog.cs" />
     <Compile Include="Security\AllowRolesCommand.cs" />
+    <Compile Include="Security\RbacProvider.cs" />
     <Compile Include="Security\IsAuthenticatedCommand.cs" />
     <Compile Include="Security\PamCommand.cs" />
     <Compile Include="Security\PamContext.cs" />
@@ -107,7 +108,6 @@
     <None Include="catalog.xsd" />
   </ItemGroup>
   <ItemGroup>
-
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -123,10 +123,8 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-
     <Content Include="SampleConfig\SpringCatalogDemo.xml" />
     <Content Include="SampleConfig\SpringCatalogObjects.xml" />
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
