@@ -21,6 +21,8 @@ namespace Zetetic.Chain.Security
 
         public RbacProvider(string catalogPath)
         {
+            logger.Debug("RbacProvider( {0} )", catalogPath);
+
             this.Catalog = string.IsNullOrEmpty(catalogPath) ? CatalogFactory.GetFactory().GetCatalog()
                 : CatalogFactory.GetFactory("file").GetCatalog(catalogPath);
         }

@@ -24,6 +24,14 @@ namespace Zetetic.Chain.Security
 
             char sep = this.Roles.Contains("!") ? '!' : ',';
 
+            if (logger.IsTraceEnabled)
+            {
+                logger.Trace("Identity authtype {0}, otype {1}, name {2}",
+                    rc.Principal.Identity.AuthenticationType, 
+                    rc.Principal.Identity.GetType(),
+                    rc.Principal.Identity.Name);
+            }
+
             foreach (string s in this.Roles.Split(sep))
             {
                 try
