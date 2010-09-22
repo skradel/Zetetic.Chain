@@ -9,7 +9,7 @@ namespace Zetetic.Chain
     {
         static void Main(string[] args)
         {
-            string catalogsrc = "catalog.xml", command = "default";
+            string catalogsrc = "catalog.xml", command = "default", logfile = null;
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -21,6 +21,11 @@ namespace Zetetic.Chain
 
                     case "-x":
                         command = args[++i];
+                        break;
+
+                    case "-log":
+                    case "-f":
+                        logfile = args[++i];
                         break;
                 }
             }
@@ -34,6 +39,13 @@ namespace Zetetic.Chain
             }
             catch (Exception ex)
             {
+                if (!string.IsNullOrEmpty(logfile))
+                    try
+                    {
+                        System.IO.File.AppendAllText(logfile, ex.Message + " :: " + ex.StackTrace, Encoding.UTF8);
+                    }
+                    catch (Exception) { }
+
                 Console.Error.WriteLine(ex.Message + " :: " + ex.StackTrace);
                 Environment.ExitCode = 1;
             }
