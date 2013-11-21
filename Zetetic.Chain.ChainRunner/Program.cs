@@ -16,10 +16,12 @@ namespace Zetetic.Chain
                 switch (args[i])
                 {
                     case "-c":
+                    case "-catalog":
                         catalogsrc = args[++i];
                         break;
 
                     case "-x":
+                    case "-command":
                         command = args[++i];
                         break;
 
@@ -29,6 +31,7 @@ namespace Zetetic.Chain
                         break;
 
                     case "-ctxtype":
+                    case "-contexttype":
                         contextType = args[++i];
                         break;
                 }
