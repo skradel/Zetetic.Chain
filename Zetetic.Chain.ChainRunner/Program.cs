@@ -9,7 +9,7 @@ namespace Zetetic.Chain
     {
         static void Main(string[] args)
         {
-            string catalogsrc = "catalog.xml", command = "default", logfile = null;
+            string catalogsrc = "catalog.xml", command = "default", logfile = null, contextType = null;
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -27,13 +27,26 @@ namespace Zetetic.Chain
                     case "-f":
                         logfile = args[++i];
                         break;
+
+                    case "-ctxtype":
+                        contextType = args[++i];
+                        break;
                 }
             }
 
             try
             {
                 ICatalog catalog = CatalogFactory.GetFactory().GetCatalog(catalogsrc);
-                IContext ctx = new ContextBase();
+                IContext ctx;
+
+                if (string.IsNullOrEmpty(contextType))
+                {
+                    ctx = new ContextBase();
+                }
+                else
+                {
+                    ctx = (IContext)Activator.CreateInstance(Type.GetType(contextType, true));
+                }
 
                 catalog[command].Execute(ctx);
             }
